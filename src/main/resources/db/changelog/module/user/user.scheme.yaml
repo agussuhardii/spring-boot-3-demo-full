@@ -8,3 +8,7 @@ databaseChangeLog:
       file: ddl/20230614_init table user.sql
       relativeToChangelogFile: true
 
+  - include:
+      file: ddl/20230614_user roles.sql
+      relativeToChangelogFile: true
+
