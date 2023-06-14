@@ -1,0 +1,10 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: agus.suhardii@gmail.com
+
+  - include:
+      file: ddl/20230614_init table user.sql
+      relativeToChangelogFile: true
+
