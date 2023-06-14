@@ -2,6 +2,8 @@ create table users
 (
     id           char(36)     not null
         primary key,
+    username     varchar(100) not null,
+    password     varchar(255) not null,
     full_name    varchar(100) not null,
     place_birth  varchar(100),
     date_birth   date,
