@@ -2,7 +2,7 @@ package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.dto.UsersDTO;
 
-import com.agussuhardi.springdemofull.service.impl.UserService;
+import com.agussuhardi.springdemofull.service.impl.UserServiceImpl;
 import com.agussuhardi.springdemofull.vo.UserQueryVO;
 import com.agussuhardi.springdemofull.vo.UserUpdateVO;
 import com.agussuhardi.springdemofull.vo.UserVO;
@@ -23,31 +23,31 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @PostMapping
     public String save(@Valid @RequestBody UserVO vO) {
-        return userService.save(vO).toString();
+        return userServiceImpl.save(vO).toString();
     }
 
     @DeleteMapping("/{id}")
     public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        userService.delete(id);
+        userServiceImpl.delete(id);
     }
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") String id,
                        @Valid @RequestBody UserUpdateVO vO) {
-        userService.update(id, vO);
+        userServiceImpl.update(id, vO);
     }
 
     @GetMapping("/{id}")
     public UsersDTO getById(@Valid @NotNull @PathVariable("id") String id) {
-        return userService.getById(id);
+        return userServiceImpl.getById(id);
     }
 
     @GetMapping
     public Page<UsersDTO> query(@Valid UserQueryVO vO) {
-        return userService.query(vO);
+        return userServiceImpl.query(vO);
     }
 }

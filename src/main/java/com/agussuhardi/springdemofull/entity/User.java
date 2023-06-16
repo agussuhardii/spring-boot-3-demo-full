@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 /**
  * @author agus.suhardii@gmail.com
  * @created 14/06/23/06/2023 :21.16
@@ -40,7 +42,9 @@ public class User extends BaseEntity implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "char(36)")
     private String id;
 
     @Column(name = "full_name", nullable = false)
@@ -70,7 +74,7 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = UserRole.class)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    private List<UserRole> roles;
+    private List<UserRole> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -98,7 +102,7 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     public void setRoles(List<UserRole> roles) {
-        this.roles.clear();
+        if (!this.roles.isEmpty()) this.roles.clear();
         this.roles.addAll(roles);
     }
 

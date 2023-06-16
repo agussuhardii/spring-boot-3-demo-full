@@ -6,22 +6,24 @@ import com.agussuhardi.springdemofull.repository.UserRepository;
 import com.agussuhardi.springdemofull.vo.UserQueryVO;
 import com.agussuhardi.springdemofull.vo.UserUpdateVO;
 import com.agussuhardi.springdemofull.vo.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+
 /**
  * @author agus.suhardii@gmail.com
  * @created 14/06/23/06/2023 :21.16
  * @project spring-demo-full
  */
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserServiceImpl implements com.agussuhardi.springdemofull.service.UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
 
     public String save(UserVO vO) {
         User bean = new User();
@@ -58,5 +60,17 @@ public class UserService {
     private User requireOne(String id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    @Override
+    public String createUserName(String fullName) {
+        var username = fullName.replaceAll("\\s", ".").trim().toLowerCase();
+        int i = 0;
+        var optional = userRepository.findByUsername(username);
+        while (optional.isPresent()) {
+            i++;
+            optional = userRepository.findByUsername(username+i);
+        }
+        return username + (i == 0 ? "" : i);
     }
 }

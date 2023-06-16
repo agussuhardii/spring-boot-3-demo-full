@@ -1,11 +1,17 @@
 package com.agussuhardi.springdemofull.service.impl;
 
 import com.agussuhardi.springdemofull.entity.User;
+import com.agussuhardi.springdemofull.entity.UserRole;
 import com.agussuhardi.springdemofull.repository.UserRepository;
+import com.agussuhardi.springdemofull.service.AuthService;
+import com.agussuhardi.springdemofull.service.UserService;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 /**
  * @author agus.suhardii@gmail.com
@@ -15,14 +21,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements com.agussuhardi.springdemofull.service.AuthService {
+public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
-    public void register(RegisterVO vo){
+    public void register(RegisterVO vo) {
         var user = new User();
         BeanUtils.copyProperties(vo, user, User.Fields.password);
-
-
+        user.setPassword(new BCryptPasswordEncoder().encode(vo.password()));
+        user.setRoles(Collections.singletonList(UserRole.ROLE_CUSTOMER));
+        user.setDeleted(false);
+        var username = userService.createUserName(vo.fullName());
+        user.setUsername(username);
+        userRepository.save(user);
     }
+
+
 }
