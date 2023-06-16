@@ -1,4 +1,4 @@
-### complete sample project spring boot
+### Complete sample project spring boot 3
 1. CRUD (Crete, Read, Update, Delete) spring jpa with postgres
 2. Rest API
 3. Spring Security
@@ -13,4 +13,4 @@
 12. and more
 
 
-<u>this project still updating</u>
+<i>this project still updating</i>
