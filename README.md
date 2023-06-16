@@ -10,7 +10,8 @@
 9. Consume tree party rest api
 10. Unit Testing
 11. Integration Testing
-12. and more
+12. Database Migration with Flyway and liquibase
+and more
 
 
 <i>this project still updating</i>
