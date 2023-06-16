@@ -31,12 +31,17 @@ public class SecurityConfig {
 
     /**
      * ignore rest api url and register by bean
-     *
      * @return ignore url security config
      */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/api/v1/auth/register", "/ignore2");
+        return (web) -> web.ignoring().requestMatchers(
+                "/api/v1/auth/register",
+                "/ignore2",
+
+                "/swagger-ui/**", "/v3/api-docs/**", "/proxy/**", "/api-docs/**"
+                );
     }
+
 
 }
