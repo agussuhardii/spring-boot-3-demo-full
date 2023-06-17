@@ -42,7 +42,7 @@ class AuthControllerTest {
     protected TestRestTemplate restTemplate;
     protected String HOST = "http://localhost:";
     protected Faker faker = new Faker(new Locale("id", "ID"));
-    protected String password = "Pa$$WorD";
+    protected String password = "Pa$$W0rD";
 
     /**
      * register test method with TestRestTemplate http client

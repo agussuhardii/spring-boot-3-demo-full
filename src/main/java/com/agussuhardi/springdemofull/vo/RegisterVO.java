@@ -1,6 +1,7 @@
 package com.agussuhardi.springdemofull.vo;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ public record RegisterVO(
         @NotNull(message = "fullName can not null")
         String fullName,
         @NotNull(message = "password can not null")
+        @Pattern(regexp = "(?=(.*[0-9]))(?=.*[!@#$%^&*()\\[\\]{}\\-_+=~`|:;\"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{6,}", message = "Minimal 6 karakter dan terdapat huruf besar kecil, simbol")
         String password,
         String placeBirth,
         LocalDate dateBirth,
