@@ -30,6 +30,7 @@ public class SwaggerConfig {
 
     /**
      * Swagger config page and input Bearer token
+     *
      * @return Swagger config Bean
      */
     @Bean
@@ -52,6 +53,7 @@ public class SwaggerConfig {
 
     /**
      * any rest api with prefix /api
+     *
      * @return prefix /api
      */
     @Bean
@@ -63,6 +65,7 @@ public class SwaggerConfig {
 
     /**
      * grouping api authentication
+     *
      * @return grouping api Bean
      */
     @Bean

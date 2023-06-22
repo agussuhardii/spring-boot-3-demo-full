@@ -26,11 +26,11 @@ import java.util.Locale;
  * @Param  statements : sql query
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
-        statements = {
-                "delete from user_role where user_role.user_id !=null;",
-                "delete from users where id is not null ;"
-        })
+//@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
+//        statements = {
+//                "delete from user_role where user_role.user_id !=null;",
+//                "delete from users where id is not null ;"
+//        })
 class AuthControllerTest {
 
     private final String BASE_URL = "/api/v1/auth";

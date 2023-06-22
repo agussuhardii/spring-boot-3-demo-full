@@ -1,7 +1,6 @@
 package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.dto.UsersDTO;
-
 import com.agussuhardi.springdemofull.service.impl.UserServiceImpl;
 import com.agussuhardi.springdemofull.vo.UserQueryVO;
 import com.agussuhardi.springdemofull.vo.UserUpdateVO;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 /**
  * @author agus.suhardii@gmail.com
  * @created 14/06/23/06/2023 :21.16
@@ -27,7 +27,7 @@ public class UserController {
 
     @PostMapping
     public String save(@Valid @RequestBody UserVO vO) {
-        return userServiceImpl.save(vO).toString();
+        return userServiceImpl.save(vO);
     }
 
     @DeleteMapping("/{id}")

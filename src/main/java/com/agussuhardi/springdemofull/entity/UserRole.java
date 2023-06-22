@@ -1,6 +1,7 @@
 package com.agussuhardi.springdemofull.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+
 /**
  * @author agus.suhardii@gmail.com
  * @created 14/06/23/06/2023 :21.16

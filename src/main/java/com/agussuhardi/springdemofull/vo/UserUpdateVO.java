@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+
 /**
  * @author agus.suhardii@gmail.com
  * @created 14/06/23/06/2023 :21.16

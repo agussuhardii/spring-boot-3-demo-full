@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
 /**
  * @author agus.suhardii@gmail.com
  * @created 14/06/23/06/2023 :21.16

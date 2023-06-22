@@ -1,13 +1,19 @@
 package com.agussuhardi.springdemofull.service.impl;
 
+import com.agussuhardi.springdemofull.config.exception.CustomException;
+import com.agussuhardi.springdemofull.config.security.JwtService;
 import com.agussuhardi.springdemofull.entity.User;
 import com.agussuhardi.springdemofull.entity.UserRole;
 import com.agussuhardi.springdemofull.repository.UserRepository;
 import com.agussuhardi.springdemofull.service.AuthService;
 import com.agussuhardi.springdemofull.service.UserService;
+import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +30,8 @@ import java.util.Collections;
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final UserService userService;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public void register(RegisterVO vo) {
@@ -37,5 +45,14 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
     }
 
+    @Override
+    public Object login(LoginVO vo) {
+        var user = userRepository.login(vo.username())
+                .orElseThrow(() -> new CustomException(HttpStatus.BAD_REQUEST, "Username or password not match"));
+
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user, vo.password(), user.getAuthorities()));
+        return jwtService.create(user);
+
+    }
 
 }

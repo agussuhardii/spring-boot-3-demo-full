@@ -1,5 +1,6 @@
 package com.agussuhardi.springdemofull.service;
 
+import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
 
 /**
@@ -9,4 +10,6 @@ import com.agussuhardi.springdemofull.vo.RegisterVO;
  */
 public interface AuthService {
     void register(RegisterVO vo);
+
+    Object login(LoginVO vo);
 }

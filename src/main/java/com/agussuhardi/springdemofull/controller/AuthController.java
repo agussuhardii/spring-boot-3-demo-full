@@ -2,6 +2,7 @@ package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.config.GlobalApiResponse;
 import com.agussuhardi.springdemofull.service.AuthService;
+import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,11 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody @Valid RegisterVO vo) {
         authService.register(vo);
         return new GlobalApiResponse<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> login(@RequestBody @Valid LoginVO vo) {
+        return new GlobalApiResponse<>(authService.login(vo), HttpStatus.CREATED);
     }
 
 }

@@ -69,7 +69,7 @@ public class UserServiceImpl implements com.agussuhardi.springdemofull.service.U
         var optional = userRepository.findByUsername(username);
         while (optional.isPresent()) {
             i++;
-            optional = userRepository.findByUsername(username+i);
+            optional = userRepository.findByUsername(username + i);
         }
         return username + (i == 0 ? "" : i);
     }
