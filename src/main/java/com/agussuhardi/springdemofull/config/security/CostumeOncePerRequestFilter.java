@@ -1,7 +1,6 @@
 package com.agussuhardi.springdemofull.config.security;
 
 import com.agussuhardi.springdemofull.config.GlobalApiResponse;
-import com.agussuhardi.springdemofull.entity.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,20 +10,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
-import java.util.Collection;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class CostumeOncePerRequestFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    private final CostumeUserDetailsService costumeUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
@@ -35,13 +36,11 @@ public class CostumeOncePerRequestFilter extends OncePerRequestFilter {
         try {
             if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
                 var jwt = bearerToken.substring(7);
-
                 var tokenClaims = jwtService.parseJwt(jwt);
+                var userDetails = costumeUserDetailsService.loadUserByUsername(tokenClaims.getBody().getId());
 
-                var roles = tokenClaims.getBody().get(User.Fields.roles, Collection.class);
-                var autContext = new UsernamePasswordAuthenticationToken(request.getUserPrincipal(), "", roles);
+                var autContext = new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(autContext);
-
                 responseWrapper.copyBodyToResponse();
             }
         } catch (Exception ex) {
@@ -49,9 +48,7 @@ public class CostumeOncePerRequestFilter extends OncePerRequestFilter {
             var status = UNAUTHORIZED;
             response.setStatus(status.value());
             response.setContentType(APPLICATION_JSON_VALUE);
-            response
-                    .getWriter()
-                    .write(new GlobalApiResponse<>(status).toJson());
+            response.getWriter().write(new GlobalApiResponse<>(status).toJson());
             return;
         }
         filterChain.doFilter(request, response);

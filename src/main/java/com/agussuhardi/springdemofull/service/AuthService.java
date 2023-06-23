@@ -1,5 +1,6 @@
 package com.agussuhardi.springdemofull.service;
 
+import com.agussuhardi.springdemofull.dto.UsersDTO;
 import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
 
@@ -12,4 +13,6 @@ public interface AuthService {
     void register(RegisterVO vo);
 
     Object login(LoginVO vo);
+
+    UsersDTO getMySelf();
 }

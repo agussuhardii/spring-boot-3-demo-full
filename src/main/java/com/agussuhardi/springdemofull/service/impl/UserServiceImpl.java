@@ -42,6 +42,7 @@ public class UserServiceImpl implements com.agussuhardi.springdemofull.service.U
         userRepository.save(bean);
     }
 
+    @Override
     public UsersDTO getById(String id) {
         User original = requireOne(id);
         return toDTO(original);

@@ -43,7 +43,7 @@ public class JwtService {
     public String create(User user) {
         Instant now = Instant.now();
         return Jwts.builder()
-                .claim(User.Fields.roles, user.getRoles())
+                .claim(User.Fields.roles, user.getAuthorities())
                 .setSubject(user.getUsername())
                 .setId(user.getId())
                 .setIssuedAt(Date.from(now))

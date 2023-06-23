@@ -2,6 +2,8 @@ package com.agussuhardi.springdemofull.service.impl;
 
 import com.agussuhardi.springdemofull.config.exception.CustomException;
 import com.agussuhardi.springdemofull.config.security.JwtService;
+import com.agussuhardi.springdemofull.config.security.facade.UserInfo;
+import com.agussuhardi.springdemofull.dto.UsersDTO;
 import com.agussuhardi.springdemofull.entity.User;
 import com.agussuhardi.springdemofull.entity.UserRole;
 import com.agussuhardi.springdemofull.repository.UserRepository;
@@ -52,7 +54,11 @@ public class AuthServiceImpl implements AuthService {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user, vo.password(), user.getAuthorities()));
         return jwtService.create(user);
+    }
 
+    @Override
+    public UsersDTO getMySelf() {
+        return userService.getById(UserInfo.getPrincipal().getId());
     }
 
 }
