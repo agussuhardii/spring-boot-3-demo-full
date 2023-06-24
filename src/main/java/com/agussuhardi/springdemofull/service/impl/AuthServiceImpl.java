@@ -11,6 +11,7 @@ import com.agussuhardi.springdemofull.service.AuthService;
 import com.agussuhardi.springdemofull.service.UserService;
 import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
+import com.agussuhardi.springdemofull.vo.UpdateUserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -61,4 +62,11 @@ public class AuthServiceImpl implements AuthService {
         return userService.getById(UserInfo.getPrincipal().getId());
     }
 
+
+    @Override
+    public void updateMySelf(UpdateUserVO vo) {
+        var user = userRepository.findById(UserInfo.getPrincipal().getId()).orElseThrow();
+        BeanUtils.copyProperties(vo, user);
+        userRepository.save(user);
+    }
 }

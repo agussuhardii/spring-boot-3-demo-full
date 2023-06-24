@@ -3,6 +3,7 @@ package com.agussuhardi.springdemofull.service;
 import com.agussuhardi.springdemofull.dto.UsersDTO;
 import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
+import com.agussuhardi.springdemofull.vo.UpdateUserVO;
 
 /**
  * @author agus.suhardii@gmail.com
@@ -15,4 +16,6 @@ public interface AuthService {
     Object login(LoginVO vo);
 
     UsersDTO getMySelf();
+
+    void updateMySelf(UpdateUserVO vo);
 }

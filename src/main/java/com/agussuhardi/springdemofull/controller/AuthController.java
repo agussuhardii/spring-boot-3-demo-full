@@ -4,6 +4,7 @@ import com.agussuhardi.springdemofull.config.GlobalApiResponse;
 import com.agussuhardi.springdemofull.service.AuthService;
 import com.agussuhardi.springdemofull.vo.LoginVO;
 import com.agussuhardi.springdemofull.vo.RegisterVO;
+import com.agussuhardi.springdemofull.vo.UpdateUserVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,11 @@ public class AuthController {
 
     @GetMapping
     public ResponseEntity<?> getMySelf() {
+        return new GlobalApiResponse<>(authService.getMySelf(), HttpStatus.CREATED);
+    }
+    @PutMapping
+    public ResponseEntity<?> getMySelf(@RequestBody @Valid UpdateUserVO vo) {
+        authService.updateMySelf(vo);
         return new GlobalApiResponse<>(authService.getMySelf(), HttpStatus.CREATED);
     }
 
