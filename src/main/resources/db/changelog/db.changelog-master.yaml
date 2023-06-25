@@ -2,3 +2,7 @@ databaseChangeLog:
   - include:
       file: module/user/user.scheme.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: module/product/product.scheme.yaml
+      relativeToChangelogFile: true
