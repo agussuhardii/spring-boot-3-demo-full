@@ -1,48 +1,53 @@
 package com.agussuhardi.springdemofull.controller;
 
-import com.agussuhardi.springdemofull.dto.ProductDTO;
-import com.agussuhardi.springdemofull.service.impl.ProductService;
+import com.agussuhardi.springdemofull.config.GlobalApiResponse;
+import com.agussuhardi.springdemofull.service.ProductService;
+import com.agussuhardi.springdemofull.service.impl.ProductServiceImpl;
 import com.agussuhardi.springdemofull.vo.ProductQueryVO;
 import com.agussuhardi.springdemofull.vo.ProductUpdateVO;
 import com.agussuhardi.springdemofull.vo.ProductVO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Validated
 @RestController
-@RequestMapping("/product")
+@RequestMapping("api/v1/products/categories")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @PostMapping
-    public String save(@Valid @RequestBody ProductVO vO) {
-        return productService.save(vO).toString();
+    public ResponseEntity<?> save(@Valid @RequestBody ProductVO vO) {
+        return new GlobalApiResponse<>(productService.save(vO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
+    public  ResponseEntity<?> delete(@Valid @NotNull @PathVariable("id") String id) {
         productService.delete(id);
+        return new GlobalApiResponse<>( HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @NotNull @PathVariable("id") String id,
+    public  ResponseEntity<?> update(@Valid @NotNull @PathVariable("id") String id,
                        @Valid @RequestBody ProductUpdateVO vO) {
         productService.update(id, vO);
+        return new GlobalApiResponse<>( HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ProductDTO getById(@Valid @NotNull @PathVariable("id") String id) {
-        return productService.getById(id);
+    public  ResponseEntity<?> getById(@Valid @NotNull @PathVariable("id") String id) {
+        return new GlobalApiResponse<>(productService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public Page<ProductDTO> query(@Valid ProductQueryVO vO) {
-        return productService.query(vO);
+    public  ResponseEntity<?> query(@Valid ProductQueryVO vO, Pageable pageable) {
+        return new GlobalApiResponse<>(productService.query(vO, pageable), HttpStatus.OK);
     }
 }

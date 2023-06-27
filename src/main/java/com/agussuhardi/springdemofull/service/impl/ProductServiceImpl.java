@@ -1,48 +1,56 @@
 package com.agussuhardi.springdemofull.service.impl;
 
+import com.agussuhardi.springdemofull.dto.CreateDTO;
 import com.agussuhardi.springdemofull.dto.ProductDTO;
 import com.agussuhardi.springdemofull.entity.Product;
 import com.agussuhardi.springdemofull.repository.ProductRepository;
 import com.agussuhardi.springdemofull.vo.ProductQueryVO;
 import com.agussuhardi.springdemofull.vo.ProductUpdateVO;
 import com.agussuhardi.springdemofull.vo.ProductVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
 @Service
-public class ProductService {
+@RequiredArgsConstructor
+public class ProductServiceImpl implements com.agussuhardi.springdemofull.service.ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
 
-    public String save(ProductVO vO) {
+    private final ProductRepository productRepository;
+
+    @Override
+    public CreateDTO save(ProductVO vO) {
         Product bean = new Product();
         BeanUtils.copyProperties(vO, bean);
         bean = productRepository.save(bean);
-        return bean.getId();
+        return new CreateDTO(bean.getId());
     }
 
+    @Override
     public void delete(String id) {
         productRepository.deleteById(id);
     }
 
+    @Override
     public void update(String id, ProductUpdateVO vO) {
         Product bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         productRepository.save(bean);
     }
 
+    @Override
     public ProductDTO getById(String id) {
         Product original = requireOne(id);
         return toDTO(original);
     }
 
-    public Page<ProductDTO> query(ProductQueryVO vO) {
-        throw new UnsupportedOperationException();
+    @Override
+    public Page<ProductDTO> query(ProductQueryVO vO, Pageable pageable) {
+        return productRepository.findAll(pageable).map(this::toDTO);
     }
 
     private ProductDTO toDTO(Product original) {
