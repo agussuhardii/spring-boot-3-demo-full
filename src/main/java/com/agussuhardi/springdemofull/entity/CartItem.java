@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serial;
 import java.io.Serializable;
 
-@Table(name = "product")
+@Table(name = "cart_item")
 @Entity
 @Getter
 @Setter
@@ -19,29 +19,30 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "update product set is_deleted=true where id=?")
+@SQLDelete(sql = "update cart_item set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
 @FieldNameConstants
-public class Product extends BaseEntity implements Serializable {
+public class CartItem extends BaseEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private Long qty;
+
     @Id
     @UuidGenerator(style = UuidGenerator.Style.TIME)
     @GeneratedValue
     private String id;
-    @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "text")
-    private String text;
-    @Column(name = "image")
-    private String image;
+
+    @Column(name = "product_id", nullable = false)
+    private String productId;
+
+    @Column(name = "qty", nullable = false)
+    private Long qty;
+
     @NotFound(action = NotFoundAction.IGNORE)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @FieldNameConstants.Exclude
-    @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @ManyToOne(targetEntity = Cart.class)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 }

@@ -8,3 +8,7 @@ databaseChangeLog:
       file: ddl/20230625_init product.sql
       relativeToChangelogFile: true
 
+  - include:
+      file: ddl/20230628_init cart.sql
+      relativeToChangelogFile: true
+

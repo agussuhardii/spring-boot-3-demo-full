@@ -1,10 +1,7 @@
 package com.agussuhardi.springdemofull.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -42,6 +39,8 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "created_at", nullable = false, updatable = false)
     protected Long createdAt;
     @Column(name = "is_deleted", nullable = false)
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private Boolean deleted;
 
 

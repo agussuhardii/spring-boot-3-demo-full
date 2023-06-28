@@ -2,6 +2,7 @@ package com.agussuhardi.springdemofull.service;
 
 import com.agussuhardi.springdemofull.dto.CreateDTO;
 import com.agussuhardi.springdemofull.dto.ProductDTO;
+import com.agussuhardi.springdemofull.entity.Product;
 import com.agussuhardi.springdemofull.vo.ProductQueryVO;
 import com.agussuhardi.springdemofull.vo.ProductUpdateQtyVO;
 import com.agussuhardi.springdemofull.vo.ProductUpdateVO;
@@ -21,4 +22,6 @@ public interface ProductService {
     ProductDTO getById(String id);
 
     Page<ProductDTO> query(ProductQueryVO vO, Pageable pageable);
+
+    Product requireOne(String id);
 }

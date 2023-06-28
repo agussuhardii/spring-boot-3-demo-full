@@ -72,7 +72,8 @@ public class ProductServiceImpl implements ProductService {
         return bean;
     }
 
-    private Product requireOne(String id) {
+    @Override
+    public Product requireOne(String id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
