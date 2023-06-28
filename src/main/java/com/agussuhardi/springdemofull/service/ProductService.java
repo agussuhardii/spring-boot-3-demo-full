@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
-    CreateDTO save(ProductVO vO);
+    CreateDTO add(ProductVO vO);
 
     void delete(String id);
 

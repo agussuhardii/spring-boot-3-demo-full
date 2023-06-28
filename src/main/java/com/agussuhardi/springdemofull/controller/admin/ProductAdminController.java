@@ -25,7 +25,7 @@ public class ProductAdminController {
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody ProductVO vO) {
-        return new GlobalApiResponse<>(productService.save(vO), HttpStatus.CREATED);
+        return new GlobalApiResponse<>(productService.add(vO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

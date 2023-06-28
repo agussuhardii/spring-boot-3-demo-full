@@ -1,0 +1,2 @@
+INSERT INTO public.category (id, name, text, icon, created_by, modified_by, created_at, updated_at, is_deleted) VALUES ('7f000101-8900-11d3-8189-00d1db930000', 'coyote', null, null, null, null, 1687935900563, null, false);
+INSERT INTO public.product (id, name, text, image, category_id, qty, created_by, modified_by, created_at, updated_at, is_deleted) VALUES ('7f000101-8901-1d1a-8189-013d23250000', 'frog', null, null, '7f000101-8900-11d3-8189-00d1db930000', 0, null, null, 1687942931237, null, false);

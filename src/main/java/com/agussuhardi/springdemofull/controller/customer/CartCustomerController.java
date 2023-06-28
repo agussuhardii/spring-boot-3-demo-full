@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Validated
 @RestController
-@RequestMapping("customer/api/v1/cart")
+@RequestMapping("customer/api/v1/carts")
 @RequiredArgsConstructor
-public class CartController {
+public class CartCustomerController {
 
 
     private final CartCustomerServiceImpl cartService;

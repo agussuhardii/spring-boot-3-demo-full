@@ -1,4 +1,4 @@
-package com.agussuhardi.springdemofull.controller.admin;
+package com.agussuhardi.springdemofull.controller.customer;
 
 import com.agussuhardi.springdemofull.service.AuthService;
 import com.agussuhardi.springdemofull.vo.LoginVO;
@@ -32,12 +32,12 @@ import java.util.Locale;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @SqlGroup({
         @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-                scripts = "classpath:/sql/create_user_ADMIN.sql"),
+                scripts = "classpath:/sql/create_user_CUSTOMER.sql"),
         @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
-                scripts = "classpath:/sql/remove_user_ADMIN.sql")
+                scripts = "classpath:/sql/remove_user_CUSTOMER.sql")
 })
 @Slf4j
-public class BaseAdminControllerTest {
+public class BaseCustomerControllerTest {
     protected final HttpHeaders headers = new HttpHeaders();
     @LocalServerPort
     protected Integer port;
@@ -58,7 +58,7 @@ public class BaseAdminControllerTest {
     public void setUp() {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HOST = HOST + port;
-        var token = authService.login(new LoginVO("admin", "password"));
+        var token = authService.login(new LoginVO("customer", "password"));
         headers.setBearerAuth(token);
     }
 

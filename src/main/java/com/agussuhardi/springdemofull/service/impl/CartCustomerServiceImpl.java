@@ -9,6 +9,7 @@ import com.agussuhardi.springdemofull.repository.CartItemRepository;
 import com.agussuhardi.springdemofull.repository.CartRepository;
 import com.agussuhardi.springdemofull.service.CartCustomerService;
 import com.agussuhardi.springdemofull.service.ProductService;
+import com.agussuhardi.springdemofull.vo.CartItemVO;
 import com.agussuhardi.springdemofull.vo.CartVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -27,25 +28,29 @@ public class CartCustomerServiceImpl implements CartCustomerService {
         var useId = UserInfo.getPrincipal().getId();
 
         var cart = cartRepository.findByUserId(useId)
-                .orElse(Cart.builder()
+                .orElse(cartRepository.save(Cart.builder()
                         .userId(useId)
-                        .build());
-        final Cart finalCart = cartRepository.save(cart);
+                        .build()));
 
-        vo.items().forEach(item -> save(item.productId(), item.qty(), finalCart));
-        return new CreateDTO(finalCart.getId());
+        if (vo.items().isEmpty()) return new CreateDTO(cart.getId());
+        for (var item : vo.items()) {
+            save(item, cart);
+        }
+        return new CreateDTO(cart.getId());
     }
 
-    private void save(String productId, long qty, Cart cart) {
-        var product = productService.requireOne(productId);
-        CartItem cartItem = cart.getItems().stream().filter(existItem -> existItem.getProductId().equals(productId)).findFirst()
+    private void save(CartItemVO itemVO, Cart cart) {
+        var product = productService.requireOne(itemVO.productId());
+        CartItem cartItem = cart.getItems().stream().filter(existItem -> existItem.getProductId().equals(itemVO.productId())).findAny()
                 .orElse(CartItem.builder()
                         .cart(cart)
-                        .productId(productId)
+                        .productId(itemVO.productId())
                         .qty(0L)
                         .build());
-        if (qty > product.getQty()) cartItem.setQty(product.getQty());
-        else cartItem.setQty(cartItem.getQty() + qty);
+
+
+        if (itemVO.qty() > product.getQty()) cartItem.setQty(product.getQty());
+        else cartItem.setQty(cartItem.getQty() + itemVO.qty());
         cartItemRepository.save(cartItem);
     }
 

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "cart")
@@ -40,6 +41,10 @@ public class Cart extends BaseEntity implements Serializable {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "cart")
-    private List<CartItem> items;
+    private List<CartItem> items = new ArrayList<>();
 
+    public List<CartItem> getItems() {
+        if (this.items == null) return new ArrayList<>();
+        return items;
+    }
 }

@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public CreateDTO save(ProductVO vO) {
+    public CreateDTO add(ProductVO vO) {
         var category = Category.builder().id(vO.categoryId()).build();
 
         Product bean = new Product();

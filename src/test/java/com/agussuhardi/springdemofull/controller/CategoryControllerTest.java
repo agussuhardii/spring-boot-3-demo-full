@@ -2,8 +2,6 @@ package com.agussuhardi.springdemofull.controller;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author agussuhardi
  * @created 28/06/23/06/2023 :13.26

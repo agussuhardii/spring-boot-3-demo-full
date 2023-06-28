@@ -48,11 +48,11 @@ class AuthControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    private String HOST = "http://localhost:";
-    private Faker faker = new Faker(new Locale("id", "ID"));
-    private String password = "Pa$$W0rD";
-    private String email = "agus.suhardii@gmail.com";
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final String HOST = "http://localhost:";
+    private final Faker faker = new Faker(new Locale("id", "ID"));
+    private final String password = "Pa$$W0rD";
+    private final String email = "agus.suhardii@gmail.com";
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
