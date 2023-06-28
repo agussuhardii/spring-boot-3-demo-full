@@ -9,7 +9,7 @@ create table users
     date_birth   date,
     gender       varchar(10),
     phone_number varchar(20),
-    email        varchar(20),
+    email        varchar(200) not null,
     full_address varchar(255),
 
     created_by   varchar(50),

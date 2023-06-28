@@ -92,7 +92,6 @@ class AuthControllerTest {
         var request = new RequestEntity<>(form, headers, HttpMethod.POST, URI.create(HOST + port + BASE_URL));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
-
     }
 
 

@@ -12,7 +12,3 @@ databaseChangeLog:
       file: ddl/20230614_user roles.sql
       relativeToChangelogFile: true
 
-  - include:
-      file: ddl/20230628_alter user email.sql
-      relativeToChangelogFile: true
-

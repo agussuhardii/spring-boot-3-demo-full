@@ -9,6 +9,7 @@ import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,9 +43,8 @@ public class User extends BaseEntity implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id", columnDefinition = "char(36)")
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
+    @GeneratedValue
     private String id;
 
     @Column(name = "full_name", nullable = false)

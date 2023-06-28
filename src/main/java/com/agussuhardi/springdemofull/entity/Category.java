@@ -1,15 +1,16 @@
 package com.agussuhardi.springdemofull.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "category")
 @Entity
@@ -28,7 +29,8 @@ public class Category extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
+    @GeneratedValue
     private String id;
 
     @Column(name = "name", nullable = false)
@@ -40,4 +42,8 @@ public class Category extends BaseEntity implements Serializable {
     @Column(name = "icon")
     private String icon;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 }

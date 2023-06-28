@@ -3,21 +3,24 @@ package com.agussuhardi.springdemofull.vo;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * @author agussuhardi
+ * @created 28/06/23/06/2023 :13.21
+ * @project spring-demo-full
+ */
 
-@Data
-public class CategoryVO implements Serializable {
+public record CategoryVO(
+        @NotNull(message = "name can not null")
+        String name,
+        String text,
+        String icon
+
+) implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private String id;
-
-    @NotNull(message = "name can not null")
-    private String name;
-
-    private String text;
-
-    private String icon;
 
 }

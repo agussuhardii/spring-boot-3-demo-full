@@ -2,9 +2,7 @@ package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.config.GlobalApiResponse;
 import com.agussuhardi.springdemofull.service.CategoryService;
-import com.agussuhardi.springdemofull.service.impl.CategoryServiceImpl;
 import com.agussuhardi.springdemofull.vo.CategoryQueryVO;
-import com.agussuhardi.springdemofull.vo.CategoryUpdateVO;
 import com.agussuhardi.springdemofull.vo.CategoryVO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -24,8 +22,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody CategoryVO vO) {
-        return new GlobalApiResponse<>(categoryService.save(vO), HttpStatus.CREATED);
+    public ResponseEntity<?> add(@Valid @RequestBody CategoryVO vO) {
+        return new GlobalApiResponse<>(categoryService.add(vO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -36,7 +34,7 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@Valid @NotNull @PathVariable("id") String id,
-                                    @Valid @RequestBody CategoryUpdateVO vO) {
+                                    @Valid @RequestBody CategoryVO vO) {
         categoryService.update(id, vO);
         return new GlobalApiResponse<>(HttpStatus.OK);
     }

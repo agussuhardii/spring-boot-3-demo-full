@@ -4,8 +4,8 @@ import com.agussuhardi.springdemofull.dto.CategoryDTO;
 import com.agussuhardi.springdemofull.dto.CreateDTO;
 import com.agussuhardi.springdemofull.entity.Category;
 import com.agussuhardi.springdemofull.repository.CategoryRepository;
+import com.agussuhardi.springdemofull.service.CategoryService;
 import com.agussuhardi.springdemofull.vo.CategoryQueryVO;
-import com.agussuhardi.springdemofull.vo.CategoryUpdateVO;
 import com.agussuhardi.springdemofull.vo.CategoryVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -17,12 +17,12 @@ import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements com.agussuhardi.springdemofull.service.CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
     @Override
-    public CreateDTO save(CategoryVO vO) {
+    public CreateDTO add(CategoryVO vO) {
         Category bean = new Category();
         BeanUtils.copyProperties(vO, bean);
         bean = categoryRepository.save(bean);
@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements com.agussuhardi.springdemofull.servi
     }
 
     @Override
-    public void update(String id, CategoryUpdateVO vO) {
+    public void update(String id, CategoryVO vO) {
         Category bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         categoryRepository.save(bean);

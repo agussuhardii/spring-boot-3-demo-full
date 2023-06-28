@@ -44,7 +44,6 @@ public class AuthServiceImpl implements AuthService {
         BeanUtils.copyProperties(vo, user, User.Fields.password);
         user.setPassword(new BCryptPasswordEncoder().encode(vo.password()));
         user.setRoles(Collections.singletonList(UserRole.ROLE_CUSTOMER));
-        user.setDeleted(false);
         var username = userService.createUserName(vo.fullName());
         user.setUsername(username);
         userRepository.save(user);
