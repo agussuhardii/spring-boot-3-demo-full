@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, String>, JpaSpecific
 
     @Query(value = "select u from User  u where u.username=?1 or u.email=?1 or u.id=?1")
     Optional<User> login(String username);
+
+    Optional<User> findByEmail(String value);
 }

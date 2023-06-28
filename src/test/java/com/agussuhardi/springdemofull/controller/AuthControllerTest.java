@@ -1,7 +1,10 @@
 package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.vo.RegisterVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 
+import javax.sql.DataSource;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
@@ -23,7 +28,7 @@ import java.util.Locale;
  * check api which automatically runs on build
  * @Param webEnvironment : set port in test
  * @Param executionPhase : run query every before or after test method
- * @Param  statements : sql query
+ * @Param statements : sql query
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
@@ -31,32 +36,45 @@ import java.util.Locale;
 //                "delete from user_role where user_role.user_id !=null;",
 //                "delete from users where id is not null ;"
 //        })
+@Slf4j
 class AuthControllerTest {
 
     private final String BASE_URL = "/api/v1/auth";
 
     @LocalServerPort
-    protected Integer port;
+    private Integer port;
 
     @Autowired
-    protected TestRestTemplate restTemplate;
-    protected String HOST = "http://localhost:";
-    protected Faker faker = new Faker(new Locale("id", "ID"));
-    protected String password = "Pa$$W0rD";
+    private TestRestTemplate restTemplate;
+    private String HOST = "http://localhost:";
+    private Faker faker = new Faker(new Locale("id", "ID"));
+    private String password = "Pa$$W0rD";
+    private String email = "agus.suhardii@gmail.com";
+    private ObjectMapper objectMapper = new ObjectMapper();
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     /**
      * register test method with TestRestTemplate http client
      */
     @Test
-    void register() {
+    void registerSuccess() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var form = new RegisterVO(faker.name().fullName(), password, null, null, null, null, null, null);
+        var form = new RegisterVO(faker.name().fullName(), password, null, null, null, null, email, null);
 
         var request = new RequestEntity<>(form, headers, HttpMethod.POST, URI.create(HOST + port + BASE_URL + "/register"));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
+        var id = jdbcTemplate.queryForObject("select id from users where email=?",String.class, email);
+        jdbcTemplate.update("delete from user_role where user_id=?", id);
+        jdbcTemplate.update("delete from users where id=?", id);
     }
 }

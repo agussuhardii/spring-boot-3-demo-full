@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Validated
 @RestController
-@RequestMapping("api/v1/products/categories")
+@RequestMapping("api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
 

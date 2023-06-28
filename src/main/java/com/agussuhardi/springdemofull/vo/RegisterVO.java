@@ -1,5 +1,6 @@
 package com.agussuhardi.springdemofull.vo;
 
+import com.agussuhardi.springdemofull.validation.EmailConstraints;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
@@ -20,7 +21,11 @@ public record RegisterVO(
         LocalDate dateBirth,
         String gender,
         String phoneNumber,
+        @NotNull(message = "email can not null")
+        @Pattern(regexp = "^([a-zA-Z0-9_\\-.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$")
+        @EmailConstraints
         String email,
         String fullAddress
 ) {
 }
+
