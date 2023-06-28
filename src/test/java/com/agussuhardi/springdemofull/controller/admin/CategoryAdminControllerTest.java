@@ -25,7 +25,8 @@ import java.net.URI;
                         "classpath:/sql/create_user_ADMIN.sql",
                         "classpath:/sql/CategoryAdminControllerTest/CategoryAdminControllerTest_BEFORE.sql"}),
         @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
-                scripts = {"classpath:/sql/remove_user_ADMIN.sql", "classpath:/sql/CategoryAdminControllerTest/CategoryAdminControllerTest_AFTER.sql"})
+                scripts = {"classpath:/sql/remove_user_ADMIN.sql",
+                        "classpath:/sql/CategoryAdminControllerTest/CategoryAdminControllerTest_AFTER.sql"})
 })
 class CategoryAdminControllerTest extends BaseAdminControllerTest {
 
