@@ -1,0 +1,2 @@
+INSERT INTO public.users (id, username, password, full_name, place_birth, date_birth, gender, phone_number, email, full_address, created_by, modified_by, created_at, updated_at, is_deleted) VALUES ('6d4ed665-202a-4a79-8f5d-d1e9f773e6b2', 'edi.maulana', '$2a$10$OCzdmr08m5TNWJQFCeNl2u8Ez8rwjHFf.wLl1gbdanDh7BZSCOMlu', 'Edi Maulana', null, null, null, null, 'random@email.com', null, null, null, 1687927615752, null, false);
+INSERT INTO public.user_role (user_id, roles) VALUES ('6d4ed665-202a-4a79-8f5d-d1e9f773e6b2', 'ROLE_CUSTOMER');
