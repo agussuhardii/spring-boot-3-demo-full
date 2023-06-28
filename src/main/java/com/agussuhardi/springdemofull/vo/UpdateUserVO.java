@@ -1,7 +1,6 @@
 package com.agussuhardi.springdemofull.vo;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 

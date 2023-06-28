@@ -43,6 +43,7 @@ public class AuthController {
     public ResponseEntity<?> getMySelf() {
         return new GlobalApiResponse<>(authService.getMySelf(), HttpStatus.CREATED);
     }
+
     @PutMapping
     public ResponseEntity<?> updateMySelf(@RequestBody @Valid UpdateUserVO vo) {
         authService.updateMySelf(vo);

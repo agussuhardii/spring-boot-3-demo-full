@@ -2,7 +2,6 @@ package com.agussuhardi.springdemofull.validation;
 
 
 import com.agussuhardi.springdemofull.validation.impl.CategoryValidateImpl;
-import com.agussuhardi.springdemofull.validation.impl.EmailConstraintsImpl;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

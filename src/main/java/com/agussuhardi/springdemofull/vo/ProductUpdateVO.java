@@ -3,8 +3,6 @@ package com.agussuhardi.springdemofull.vo;
 
 import com.agussuhardi.springdemofull.validation.CategoryValidate;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 import java.io.Serializable;

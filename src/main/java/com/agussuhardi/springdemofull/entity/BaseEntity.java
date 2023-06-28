@@ -48,7 +48,7 @@ public abstract class BaseEntity implements Serializable {
     @PrePersist
     public void prePersist() {
         if (createdAt == null) this.createdAt = System.currentTimeMillis();
-        this.deleted=false;
+        this.deleted = false;
     }
 
     @PreUpdate

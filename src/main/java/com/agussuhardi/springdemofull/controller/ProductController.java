@@ -2,8 +2,8 @@ package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.config.GlobalApiResponse;
 import com.agussuhardi.springdemofull.service.ProductService;
-import com.agussuhardi.springdemofull.vo.ProductUpdateQtyVO;
 import com.agussuhardi.springdemofull.vo.ProductQueryVO;
+import com.agussuhardi.springdemofull.vo.ProductUpdateQtyVO;
 import com.agussuhardi.springdemofull.vo.ProductUpdateVO;
 import com.agussuhardi.springdemofull.vo.ProductVO;
 import jakarta.validation.Valid;
@@ -29,33 +29,33 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public  ResponseEntity<?> delete(@Valid @NotNull @PathVariable("id") String id) {
+    public ResponseEntity<?> delete(@Valid @NotNull @PathVariable("id") String id) {
         productService.delete(id);
-        return new GlobalApiResponse<>( HttpStatus.OK);
+        return new GlobalApiResponse<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<?> update(@Valid @NotNull @PathVariable("id") String id,
-                       @Valid @RequestBody ProductUpdateVO vO) {
+    public ResponseEntity<?> update(@Valid @NotNull @PathVariable("id") String id,
+                                    @Valid @RequestBody ProductUpdateVO vO) {
         productService.update(id, vO);
-        return new GlobalApiResponse<>( HttpStatus.OK);
+        return new GlobalApiResponse<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<?> getById(@Valid @NotNull @PathVariable("id") String id) {
+    public ResponseEntity<?> getById(@Valid @NotNull @PathVariable("id") String id) {
         return new GlobalApiResponse<>(productService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public  ResponseEntity<?> query(@Valid ProductQueryVO vO, Pageable pageable) {
+    public ResponseEntity<?> query(@Valid ProductQueryVO vO, Pageable pageable) {
         return new GlobalApiResponse<>(productService.query(vO, pageable), HttpStatus.OK);
     }
 
     @PutMapping("/{id}/qty")
-    public  ResponseEntity<?> updateQty(@Valid @NotNull @PathVariable("id") String id,
-                                     @Valid @RequestBody ProductUpdateQtyVO vO) {
+    public ResponseEntity<?> updateQty(@Valid @NotNull @PathVariable("id") String id,
+                                       @Valid @RequestBody ProductUpdateQtyVO vO) {
         productService.updateQty(id, vO);
-        return new GlobalApiResponse<>( HttpStatus.OK);
+        return new GlobalApiResponse<>(HttpStatus.OK);
     }
 
 }

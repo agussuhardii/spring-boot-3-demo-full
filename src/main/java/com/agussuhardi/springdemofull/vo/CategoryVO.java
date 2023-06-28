@@ -1,7 +1,6 @@
 package com.agussuhardi.springdemofull.vo;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
