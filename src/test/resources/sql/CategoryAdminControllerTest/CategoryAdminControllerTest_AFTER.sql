@@ -1,0 +1,1 @@
+delete from category where id='7f000101-8900-11d3-8189-00d1db930000';
