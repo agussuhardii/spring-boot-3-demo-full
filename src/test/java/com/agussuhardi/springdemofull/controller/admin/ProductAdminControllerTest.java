@@ -1,6 +1,7 @@
 package com.agussuhardi.springdemofull.controller.admin;
 
-import com.agussuhardi.springdemofull.vo.CategoryVO;
+import com.agussuhardi.springdemofull.vo.ProductUpdateQtyVO;
+import com.agussuhardi.springdemofull.vo.ProductUpdateVO;
 import com.agussuhardi.springdemofull.vo.ProductVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +34,7 @@ class ProductAdminControllerTest extends BaseAdminControllerTest {
 
     private final String BASE_URL = "/admin/api/v1/products";
     private final String categoryId = "7f000101-8900-11d3-8189-00d1db930000";
+    private final String productId = "7f000101-8901-1d1a-8189-013d23250000";
 
     @Test
     void add() throws JsonProcessingException {
@@ -50,7 +52,7 @@ class ProductAdminControllerTest extends BaseAdminControllerTest {
 
     @Test
     void delete() {
-        var request = new RequestEntity<>(null, headers, HttpMethod.DELETE, URI.create(HOST + BASE_URL + "/" + categoryId));
+        var request = new RequestEntity<>(null, headers, HttpMethod.DELETE, URI.create(HOST + BASE_URL + "/" + productId));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -59,16 +61,27 @@ class ProductAdminControllerTest extends BaseAdminControllerTest {
     void update() {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var form = new CategoryVO(faker.animal().name(), null, null);
+        var form = new ProductUpdateVO(faker.animal().name(), null, null, categoryId);
 
-        var request = new RequestEntity<>(form, headers, HttpMethod.PUT, URI.create(HOST + BASE_URL + "/" + categoryId));
+        var request = new RequestEntity<>(form, headers, HttpMethod.PUT, URI.create(HOST + BASE_URL + "/" + productId));
+        var response = restTemplate.exchange(request, String.class);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void updateQty() {
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var form = new ProductUpdateQtyVO(300L);
+
+        var request = new RequestEntity<>(form, headers, HttpMethod.PUT, URI.create(HOST + BASE_URL + "/" + productId + "/qty"));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void getById() {
-        var request = new RequestEntity<>(null, headers, HttpMethod.GET, URI.create(HOST + BASE_URL + "/" + categoryId));
+        var request = new RequestEntity<>(null, headers, HttpMethod.GET, URI.create(HOST + BASE_URL + "/" + productId));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 
