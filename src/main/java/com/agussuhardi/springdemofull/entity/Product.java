@@ -49,4 +49,6 @@ public class Product extends BaseEntity implements Serializable {
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    Long qty;
 }

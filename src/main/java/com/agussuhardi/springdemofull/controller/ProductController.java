@@ -2,7 +2,7 @@ package com.agussuhardi.springdemofull.controller;
 
 import com.agussuhardi.springdemofull.config.GlobalApiResponse;
 import com.agussuhardi.springdemofull.service.ProductService;
-import com.agussuhardi.springdemofull.service.impl.ProductServiceImpl;
+import com.agussuhardi.springdemofull.vo.ProductUpdateQtyVO;
 import com.agussuhardi.springdemofull.vo.ProductQueryVO;
 import com.agussuhardi.springdemofull.vo.ProductUpdateVO;
 import com.agussuhardi.springdemofull.vo.ProductVO;
@@ -50,4 +50,12 @@ public class ProductController {
     public  ResponseEntity<?> query(@Valid ProductQueryVO vO, Pageable pageable) {
         return new GlobalApiResponse<>(productService.query(vO, pageable), HttpStatus.OK);
     }
+
+    @PutMapping("/{id}/qty")
+    public  ResponseEntity<?> updateQty(@Valid @NotNull @PathVariable("id") String id,
+                                     @Valid @RequestBody ProductUpdateQtyVO vO) {
+        productService.updateQty(id, vO);
+        return new GlobalApiResponse<>( HttpStatus.OK);
+    }
+
 }
