@@ -1,20 +1,9 @@
 package com.agussuhardi.springdemofull.vo;
 
-
-import lombok.Data;
-
-import java.io.Serializable;
-
-@Data
-public class ProductQueryVO implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private String id;
-
-    private String name;
-
-    private String text;
-
-    private String image;
-
+/**
+ * @author agussuhardi
+ * @created 28/06/23/06/2023 :16.10
+ * @project spring-demo-full
+ */
+public class ProductQueryVO extends QueryVO {
 }
