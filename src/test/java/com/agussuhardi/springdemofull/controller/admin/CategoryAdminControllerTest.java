@@ -3,7 +3,6 @@ package com.agussuhardi.springdemofull.controller.admin;
 import com.agussuhardi.springdemofull.vo.CategoryVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
@@ -50,16 +49,24 @@ class CategoryAdminControllerTest extends BaseAdminControllerTest {
 
     @Test
     void delete() {
+        var request = new RequestEntity<>(null, headers, HttpMethod.DELETE, URI.create(HOST + BASE_URL + "/" + categoryId));
+        var response = restTemplate.exchange(request, String.class);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void update() {
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var form = new CategoryVO(faker.animal().name(), null, null);
+
+        var request = new RequestEntity<>(form, headers, HttpMethod.PUT, URI.create(HOST + BASE_URL + "/" + categoryId));
+        var response = restTemplate.exchange(request, String.class);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void getById() {
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
         var request = new RequestEntity<>(null, headers, HttpMethod.GET, URI.create(HOST + BASE_URL + "/" + categoryId));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -68,12 +75,9 @@ class CategoryAdminControllerTest extends BaseAdminControllerTest {
 
     @Test
     void query() {
-    }
-
-
-    @AfterEach
-    public void after() {
-//        jdbcTemplate.update("delete from public.pilgrim where user_id=?", userId);
+        var request = new RequestEntity<>(null, headers, HttpMethod.GET, URI.create(HOST + BASE_URL));
+        var response = restTemplate.exchange(request, String.class);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
 }
