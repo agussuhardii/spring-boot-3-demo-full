@@ -1,0 +1,2 @@
+INSERT INTO public.users (id, username, password, full_name, place_birth, date_birth, gender, phone_number, email, full_address, created_by, modified_by, created_at, updated_at, is_deleted) VALUES ('7f000101-8900-1235-8189-00c23ab50000', 'admin', '$2a$10$GwG9zjmPRx4Z4I3MS7RJG.sI2zYk5MMrkK2ye52J03N9/EvMqvblW', 'admin', null, null, null, null, 'admin@gmail.com', null, null, null, 1687934876341, null, false);
+INSERT INTO public.user_role (user_id, roles) VALUES ('7f000101-8900-1235-8189-00c23ab50000', 'ROLE_ADMIN');

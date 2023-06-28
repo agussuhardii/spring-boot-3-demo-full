@@ -13,7 +13,7 @@ import com.agussuhardi.springdemofull.vo.UpdateUserVO;
 public interface AuthService {
     void register(RegisterVO vo);
 
-    Object login(LoginVO vo);
+    String login(LoginVO vo);
 
     UsersDTO getMySelf();
 

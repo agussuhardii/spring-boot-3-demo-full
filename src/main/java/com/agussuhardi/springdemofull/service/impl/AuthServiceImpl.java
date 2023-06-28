@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Object login(LoginVO vo) {
+    public String login(LoginVO vo) {
         var user = userRepository.login(vo.username())
                 .orElseThrow(() -> new CustomException(HttpStatus.BAD_REQUEST, "Username or password not match"));
 

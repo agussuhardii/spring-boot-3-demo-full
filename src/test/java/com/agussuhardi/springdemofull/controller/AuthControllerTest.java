@@ -34,9 +34,9 @@ import java.util.Locale;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @SqlGroup({
         @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-                scripts = "classpath:/sql/AuthControllerTest_BEFORE.sql"),
+                scripts = "classpath:/sql/AuthControllerTest/AuthControllerTest_BEFORE.sql"),
         @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
-                scripts = "classpath:/sql/AuthControllerTest_AFTER.sql")
+                scripts = "classpath:/sql/AuthControllerTest/AuthControllerTest_AFTER.sql")
 })
 @Slf4j
 class AuthControllerTest {
