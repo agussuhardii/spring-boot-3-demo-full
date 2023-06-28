@@ -38,26 +38,10 @@ public class SecurityConfig {
     private final CostumeOncePerRequestFilter jwtAuthenticationFilter;
 
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .securityMatcher("/api/**", "/app/**")
-//                .authorizeHttpRequests((authz) -> authz
-//                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-//                        .anyRequest().authenticated()
-//                )
-//
-//                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .exceptionHandling(e -> e.authenticationEntryPoint(new CostumeAuthenticationEntryPoint()));
-//
-//        return http.build();
-//    }
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**", "/api/v1/**")
                         .permitAll().anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(

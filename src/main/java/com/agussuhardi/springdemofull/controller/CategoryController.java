@@ -3,7 +3,6 @@ package com.agussuhardi.springdemofull.controller;
 import com.agussuhardi.springdemofull.config.GlobalApiResponse;
 import com.agussuhardi.springdemofull.service.CategoryService;
 import com.agussuhardi.springdemofull.vo.CategoryQueryVO;
-import com.agussuhardi.springdemofull.vo.CategoryVO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
@@ -20,24 +22,6 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
 
     private final CategoryService categoryService;
-
-    @PostMapping
-    public ResponseEntity<?> add(@Valid @RequestBody CategoryVO vO) {
-        return new GlobalApiResponse<>(categoryService.add(vO), HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@Valid @NotNull @PathVariable("id") String id) {
-        categoryService.delete(id);
-        return new GlobalApiResponse<>(HttpStatus.OK);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @NotNull @PathVariable("id") String id,
-                                    @Valid @RequestBody CategoryVO vO) {
-        categoryService.update(id, vO);
-        return new GlobalApiResponse<>(HttpStatus.OK);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@Valid @NotNull @PathVariable("id") String id) {

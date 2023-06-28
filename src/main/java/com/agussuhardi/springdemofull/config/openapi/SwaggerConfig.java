@@ -74,4 +74,23 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder().group("auth").pathsToMatch(paths).build();
     }
 
+
+    @Bean
+    public GroupedOpenApi adminApi() {
+        String[] paths = {"/admin/api/**"};
+        return GroupedOpenApi.builder().group("ADMIN").pathsToMatch(paths).build();
+    }
+
+    @Bean
+    public GroupedOpenApi customerApi() {
+        String[] paths = {"/customer/api/**"};
+        return GroupedOpenApi.builder().group("CUSTOMER").pathsToMatch(paths).build();
+    }
+
+    @Bean
+    public GroupedOpenApi publicApi() {
+        String[] paths = {"/api/**"};
+        return GroupedOpenApi.builder().group("PUBLIC").pathsToMatch(paths).build();
+    }
+
 }
