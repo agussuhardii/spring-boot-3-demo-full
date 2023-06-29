@@ -21,8 +21,8 @@ import java.util.Collections;
  * @created 28/06/23/06/2023 :14.40
  * @project spring-demo-full
  */
-@Component
-@Profile("dev")
+//@Component
+//@Profile("dev")
 @RequiredArgsConstructor
 public class Init implements ApplicationListener<ApplicationReadyEvent> {
     private final UserRepository userRepository;

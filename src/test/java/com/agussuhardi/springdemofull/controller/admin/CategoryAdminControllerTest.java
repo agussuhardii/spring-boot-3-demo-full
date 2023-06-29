@@ -71,7 +71,6 @@ class CategoryAdminControllerTest extends BaseAdminControllerTest {
         var request = new RequestEntity<>(null, headers, HttpMethod.GET, URI.create(HOST + BASE_URL + "/" + categoryId));
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-
     }
 
     @Test

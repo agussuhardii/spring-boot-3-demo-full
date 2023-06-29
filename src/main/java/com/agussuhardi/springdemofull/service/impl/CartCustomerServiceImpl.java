@@ -32,7 +32,7 @@ public class CartCustomerServiceImpl implements CartCustomerService {
                         .userId(useId)
                         .build()));
 
-        if (vo.items().isEmpty()) return new CreateDTO(cart.getId());
+        if (vo.items() == null) return new CreateDTO(cart.getId());
         for (var item : vo.items()) {
             save(item, cart);
         }
@@ -51,7 +51,7 @@ public class CartCustomerServiceImpl implements CartCustomerService {
 
         if (itemVO.qty() > product.getQty()) cartItem.setQty(product.getQty());
         else cartItem.setQty(cartItem.getQty() + itemVO.qty());
-        cartItemRepository.save(cartItem);
+        var e = cartItemRepository.save(cartItem);
     }
 
 

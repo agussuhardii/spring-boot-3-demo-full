@@ -47,9 +47,6 @@ class CartCustomerControllerTest extends BaseCustomerControllerTest {
 
         var request = new RequestEntity<>(form, headers, HttpMethod.POST, URI.create(HOST + BASE_URL));
         var response = restTemplate.exchange(request, String.class);
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println(response);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 
 
@@ -60,5 +57,8 @@ class CartCustomerControllerTest extends BaseCustomerControllerTest {
 
     @Test
     void getByPrincipal() {
+        var request = new RequestEntity<>(null, headers, HttpMethod.GET, URI.create(HOST + BASE_URL));
+        var response = restTemplate.exchange(request, String.class);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
