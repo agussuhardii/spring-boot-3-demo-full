@@ -6,3 +6,7 @@ databaseChangeLog:
   - include:
       file: module/product/product.scheme.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: module/order/order.scheme.yaml
+      relativeToChangelogFile: true
