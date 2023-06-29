@@ -1,4 +1,6 @@
-create table order_
+create schema if not exists order_;
+
+create table order_.order_
 (
     id           char(36)    not null,
     user_        char(36)    not null,

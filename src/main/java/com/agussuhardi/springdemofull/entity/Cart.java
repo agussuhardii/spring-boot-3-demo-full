@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(name = "cart")
+@Table(schema = "cart",name = "cart")
 @Entity
 @Getter
 @Setter
@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "update cart set is_deleted=true where id=?")
+@SQLDelete(sql = "update cart.cart set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
 @FieldNameConstants
 public class Cart extends BaseEntity implements Serializable {

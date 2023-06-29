@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serial;
 import java.io.Serializable;
 
-@Table(name = "product")
+@Table(schema = "product",name = "product")
 @Entity
 @Getter
 @Setter
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "update product set is_deleted=true where id=?")
+@SQLDelete(sql = "update product.product set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
 @FieldNameConstants
 public class Product extends BaseEntity implements Serializable {

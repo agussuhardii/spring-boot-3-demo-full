@@ -1,12 +1,24 @@
 databaseChangeLog:
   - include:
+      author: agus suhardi
+      labels: user scheme
       file: module/user/user.scheme.yaml
       relativeToChangelogFile: true
 
   - include:
+      author: agus suhardi
+      labels: product scheme
       file: module/product/product.scheme.yaml
       relativeToChangelogFile: true
 
   - include:
+      author: agus suhardi
+      labels: cart scheme
+      file: module/cart/cart.scheme.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      author: agus suhardi
+      labels: order scheme
       file: module/order/order.scheme.yaml
       relativeToChangelogFile: true

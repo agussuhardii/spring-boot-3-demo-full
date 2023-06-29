@@ -1,4 +1,6 @@
-create table cart
+create schema if not exists cart;
+
+create table cart.cart
 (
     id          char(36) not null,
     user_id     char(36) not null,
@@ -11,7 +13,7 @@ create table cart
     primary key (id)
 );
 
-create table cart_item
+create table cart.cart_item
 (
     id          char(36) not null,
     cart_id     char(36) not null,
@@ -24,5 +26,5 @@ create table cart_item
     updated_at  numeric,
     is_deleted  boolean  not null default false,
     primary key (id),
-    foreign key (cart_id) references cart (id)
+    foreign key (cart_id) references cart.cart (id)
 );

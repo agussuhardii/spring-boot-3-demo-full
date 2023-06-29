@@ -13,7 +13,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-@Table(name = "category")
+@Table(schema = "product",name = "category")
 @Entity
 @Getter
 @Setter
@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "update category set is_deleted=true where id=?")
+@SQLDelete(sql = "update product.category set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
 @FieldNameConstants
 public class Category extends BaseEntity implements Serializable {

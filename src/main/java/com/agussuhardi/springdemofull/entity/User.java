@@ -25,7 +25,7 @@ import java.util.List;
  * @created 14/06/23/06/2023 :21.16
  * @project spring-demo-full
  */
-@Table(name = "users")
+@Table(schema = "user_",name = "user_")
 @Entity
 @Getter
 @Setter
@@ -33,7 +33,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "update users set is_deleted=true where id=?")
+@SQLDelete(sql = "update user_.user_ set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
 @FieldNameConstants
 public class User extends BaseEntity implements UserDetails {
@@ -72,7 +72,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = UserRole.class)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(schema = "user_",name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private List<UserRole> roles = new ArrayList<>();
 
     @Override

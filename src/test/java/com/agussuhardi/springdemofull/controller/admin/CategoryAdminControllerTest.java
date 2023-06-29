@@ -45,7 +45,7 @@ class CategoryAdminControllerTest extends BaseAdminControllerTest {
 
 
         var id = new ObjectMapper().readTree(response.getBody()).path("data").path("id").asText();
-        jdbcTemplate.update("delete from category where id=?", id);
+        jdbcTemplate.update("delete from product.category where id=?", id);
     }
 
     @Test

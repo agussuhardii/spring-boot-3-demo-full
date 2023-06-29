@@ -51,8 +51,8 @@ class CartCustomerControllerTest extends BaseCustomerControllerTest {
 
 
         var cartId = new ObjectMapper().readTree(response.getBody()).path("data").path("id").asText();
-        jdbcTemplate.update("delete from cart_item where cart_id=?", cartId);
-        jdbcTemplate.update("delete from cart where id=?", cartId);
+        jdbcTemplate.update("delete from cart.cart_item where cart_id=?", cartId);
+        jdbcTemplate.update("delete from cart.cart where id=?", cartId);
     }
 
     @Test

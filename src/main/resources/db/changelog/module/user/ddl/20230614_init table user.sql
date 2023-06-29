@@ -1,4 +1,6 @@
-create table users
+create schema if not exists user_;
+
+create table user_.user_
 (
     id           char(36)     not null
         primary key,
@@ -18,3 +20,12 @@ create table users
     updated_at   numeric,
     is_deleted   boolean      not null default false
 );
+
+create table user_.user_role
+(
+    user_id char(36)    not null,
+    roles   varchar(20) not null,
+    foreign key (user_id) references user_.user_ (id),
+    primary key (user_id, roles)
+);
+

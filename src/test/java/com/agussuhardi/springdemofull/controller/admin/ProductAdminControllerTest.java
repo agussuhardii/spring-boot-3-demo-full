@@ -47,7 +47,7 @@ class ProductAdminControllerTest extends BaseAdminControllerTest {
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
         var id = new ObjectMapper().readTree(response.getBody()).path("data").path("id").asText();
-        jdbcTemplate.update("delete from product where id=?", id);
+        jdbcTemplate.update("delete from product.product where id=?", id);
     }
 
     @Test

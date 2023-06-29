@@ -5,5 +5,6 @@ databaseChangeLog:
       author: agus.suhardii@gmail.com
 
   - include:
-      file: ddl/20230614_init table user.sql
+      file: ddl/20230628_init cart.sql
       relativeToChangelogFile: true
+

@@ -75,9 +75,9 @@ class AuthControllerTest {
         var response = restTemplate.exchange(request, String.class);
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
-        var id = jdbcTemplate.queryForObject("select id from users where email=?", String.class, email);
-        jdbcTemplate.update("delete from user_role where user_id=?", id);
-        jdbcTemplate.update("delete from users where id=?", id);
+        var id = jdbcTemplate.queryForObject("select id from user_.user_ where email=?", String.class, email);
+        jdbcTemplate.update("delete from user_.user_role where user_id=?", id);
+        jdbcTemplate.update("delete from user_.user_ where id=?", id);
     }
 
 

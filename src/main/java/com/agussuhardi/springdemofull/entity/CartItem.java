@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serial;
 import java.io.Serializable;
 
-@Table(name = "cart_item")
+@Table(schema = "cart",name = "cart_item")
 @Entity
 @Getter
 @Setter
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "update cart_item set is_deleted=true where id=?")
+@SQLDelete(sql = "update cart.cart_item set is_deleted=true where id=?")
 @Where(clause = "is_deleted=false")
 @FieldNameConstants
 public class CartItem extends BaseEntity implements Serializable {
